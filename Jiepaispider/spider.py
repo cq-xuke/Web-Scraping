@@ -88,7 +88,8 @@ def save_image(url):
     except RequestException:
         print(('请求详情页出错', url))
     if content:
-        file_path = '{0}\\{1}.{2}'.format(os.path.join(os.getcwd(), 'images'), md5(content).hexdigest(), 'jpg')
+        file_path = '{0}\\{1}.{2}'.format(os.path.join(os.getcwd(), 'images'), 
+                                          md5(content).hexdigest(), 'jpg')
         if not os.path.exists(file_path):
             with open(file_path, 'wb', ) as f:
                 f.write(content)
