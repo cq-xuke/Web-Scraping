@@ -8,3 +8,5 @@ url VARCHAR(100), images VARCHAR(5000), created TIMESTAMP DEFAULT CURRENT_TIMEST
 PRIMARY KEY(id));
 '''
 INSERT_DATA='INSERT INTO ToutiaoPage (title,url,images) VALUES ("{0}","{1}","{2}")'
+
+CONNECTION = dict(host='127.0.0.1', user='root', passwd='xk200900330022', db='mysql', charset="utf8")
