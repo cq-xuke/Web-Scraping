@@ -88,7 +88,7 @@ def save_image(url):
     except RequestException:
         print(('请求详情页出错', url))
     if content:
-        file_path = '{0}\\{1}.{2}'.format(os.path.join(os.getcwd(), 'images'), 
+        file_path = '{0}\\{1}.{2}'.format(os.path.join(os.getcwd(), 'images'),
                                           md5(content).hexdigest(), 'jpg')
         if not os.path.exists(file_path):
             with open(file_path, 'wb', ) as f:
@@ -98,19 +98,18 @@ def save_image(url):
 
 
 def save_to_mysql(result):
-    conn = pymysql.connect(host='127.0.0.1', user='root', passwd='xk200900330022', db='mysql')
+    conn = pymysql.connect(**CONNECTION)
     cur = conn.cursor()
     cur.execute('USE scraping')
     try:
-        cur.execute(INSERT_DATA.format(result['title'].encode('utf-8'),
-                                       result['url'],
-                                       str(result['images'])))
+        cur.execute(INSERT_DATA.format(result['title'], result['url'], str(result['images'])))
         cur.connection.commit()
         print('储存到mysql数据库成功')
     except pymysql.DatabaseError as e:
         print('储存到mysql数据库失败', e)
     cur.close()
     conn.close()
+
 
 def save_to_file(result):
     with open(os.path.join(os.getcwd(), 'data.txt'), 'a', encoding='utf-8') as f:
@@ -130,7 +129,7 @@ def main(offset, keywords=KEYWORDS):
 
 if __name__ == '__main__':
     groups = [x * 20 for x in range(GROUP_START, GROUP_END + 1)]
-    conn = pymysql.connect(host='127.0.0.1', user='root', passwd='xk200900330022', db='mysql')
+    conn = pymysql.connect(**CONNECTION)
     cur = conn.cursor()
     cur.execute('USE scraping')
     try:
