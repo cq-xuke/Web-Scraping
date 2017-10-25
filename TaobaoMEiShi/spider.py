@@ -1,5 +1,4 @@
 import re
-
 import pymysql
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
